@@ -11,7 +11,8 @@ struct QuestionView: View {
     @State var currentQuestionIndex = 0
     @State var incorrectAnswers = 0
     @State var correctAnswerSelected = false
-    @State var answerSelected = false
+    @State var isSelected = false
+    @State private var scale = 1.0
     
     @State private var questions: [Question] = QuizzoQuestions.shuffled()
     
@@ -41,43 +42,48 @@ struct QuestionView: View {
                 ForEach(questions[currentQuestionIndex].answers) { answer in
                     AnswerRow(answer: answer)
                         .onTapGesture {
-                            guard !answerSelected else { return }
-                            answerSelected = true
+                            guard !isSelected else {return}
+                            isSelected = true
                             
                             if answer.isCorrect {
                                 correctAnswerSelected = true
+
                             }
                             
                             else {
                                 incorrectAnswers += 1
                             }
+                            
                         }
                 }
                 
-
-                    
-                }
-                
+            }
+            
+            
             PrimaryButton(text: "Next") {
-                answerSelected = false
+                isSelected = false
                 correctAnswerSelected = false
                 
                 if currentQuestionIndex < questions.count - 1 {
                     currentQuestionIndex += 1
                 }
-            }
                 
-                Spacer()
-                
+                else {
+                    //transition to result view
+                }
             }
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(red: 0.984, green: 0.929, blue: 0.847))
-            .navigationBarHidden(true)
+            
+            Spacer()
+            
         }
-
-    
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(red: 0.984, green: 0.929, blue: 0.847))
+        .navigationBarHidden(true)
     }
+    
+    
+}
 
 
 #Preview {

@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct ResultView: View {
-    let incorrectAnswers: Int
-    var onRetake: () -> Void
-    
+
     var body: some View {
         VStack(spacing: 30) {
             Text("Quiz Completed!")
@@ -18,7 +16,7 @@ struct ResultView: View {
                 .foregroundStyle(.purple)
                 .fontWeight(.heavy)
             
-            Text("You selected the wrong answer \(incorrectAnswers) times.")
+            Text("You selected the wrong answer 5 times.")
                 .foregroundStyle(.gray)
                 .fontWeight(.heavy)
             
@@ -37,5 +35,5 @@ struct ResultView: View {
 }
 
 #Preview {
-    ResultView(incorrectAnswers: 3, onRetake: {})
+    ResultView()
 }
