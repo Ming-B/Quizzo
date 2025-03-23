@@ -8,41 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        
-        NavigationStack {
-            
-            VStack(spacing: 40) {
-                
-                VStack(spacing: 20) {
-                     
-                    Text("Quizzo")
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .foregroundStyle(.purple)
-                    
-                    Text("Are you ready to test your knowledge?")
-                        .foregroundStyle(.purple)
-                    
-                }
-                
-                NavigationLink {
-                    TriviaView()
-                } label: {
-                    PrimaryButton(text: "Start")
+    @State private var showQuiz = false
 
+    var body: some View {
+        ZStack {
+            if showQuiz {
+                QuestionView()
+                    .transition(.scale)
+            } else {
+                VStack(spacing: 40) {
+                    VStack(spacing: 20) {
+                        Text("Quizzo")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                            .foregroundStyle(.purple)
+                        
+                        Text("Are you ready to test your knowledge?")
+                            .foregroundStyle(.purple)
+                    }
+                    
+                    Button(action: {
+                        withAnimation {
+                            showQuiz = true
+                        }
+                    }) {
+                        PrimaryButton(text: "Start", action: {})
+                    }
                 }
-                
-                
-                
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(red: 0.984, green: 0.929, blue: 0.847))
+                .ignoresSafeArea()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea(edges: .all)
-            .background(Color(red: 0.984313725490196, green: 0.929411764705824, blue: 0.8470588235294118))
-            
         }
     }
 }
+
 
 #Preview {
     ContentView()

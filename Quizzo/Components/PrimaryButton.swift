@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct PrimaryButton: View {
-    var text:String
+    var text: String
     var background: Color = .purple
+    var action: () -> Void
     
     var body: some View {
-        Text(text)
-            .foregroundStyle(.white)
-            .padding()
-            .padding(.horizontal)
-            .background(background)
-            .clipShape(Capsule()) 
+        Button(action: action) {
+            Text(text)
+                .foregroundStyle(.white)
+                .padding()
+                .padding(.horizontal)
+                .background(background)
+                .clipShape(Capsule())
+        }
     }
 }
 
 #Preview {
-    PrimaryButton(text: "Next")
+    PrimaryButton(text: "Next", action: { print("Button tapped") })
 }
+

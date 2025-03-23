@@ -8,45 +8,77 @@
 import SwiftUI
 
 struct QuestionView: View {
+    @State var currentQuestionIndex = 0
+    @State var incorrectAnswers = 0
+    @State var correctAnswerSelected = false
+    @State var answerSelected = false
+    
+    @State private var questions: [Question] = QuizzoQuestions.shuffled()
+    
     var body: some View {
         VStack(spacing: 20) {
             HStack{
-                Text("Trivia Game")
+                Text("Quizzo")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                     .foregroundStyle(.purple)
                 
                 Spacer()
                 
-                Text("1 out of 5")
+                Text("\(currentQuestionIndex + 1) out of \(questions.count)")
                     .foregroundStyle(.purple)
                     .fontWeight(.heavy)
                 
             }
             
             VStack(alignment: .leading, spacing: 20) {
-                Text("What is the first element on the periodic table?")
-                    .font(.system(size:20))
+                Text(questions[currentQuestionIndex].text)
+                    .font(.system(size: 20))
                     .bold()
                     .foregroundStyle(.gray)
-    
-                AnswerRow(answer: Answer(text: "Hydrogen", isCorrect: true))
-                AnswerRow(answer: Answer(text: "Helium", isCorrect: false))
-                AnswerRow(answer: Answer(text: "Oxygen", isCorrect: false))
-                AnswerRow(answer: Answer(text: "Lithium", isCorrect: false))
+                
+                
+                ForEach(questions[currentQuestionIndex].answers) { answer in
+                    AnswerRow(answer: answer)
+                        .onTapGesture {
+                            guard !answerSelected else { return }
+                            answerSelected = true
+                            
+                            if answer.isCorrect {
+                                correctAnswerSelected = true
+                            }
+                            
+                            else {
+                                incorrectAnswers += 1
+                            }
+                        }
+                }
+                
+
+                    
+                }
+                
+            PrimaryButton(text: "Next") {
+                answerSelected = false
+                correctAnswerSelected = false
+                
+                if currentQuestionIndex < questions.count - 1 {
+                    currentQuestionIndex += 1
+                }
             }
-            
-            PrimaryButton(text: "Next")
-            
-            Spacer()
-            
+                
+                Spacer()
+                
+            }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(red: 0.984, green: 0.929, blue: 0.847))
+            .navigationBarHidden(true)
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(red: 0.984313725490196, green: 0.929411764705824, blue: 0.8470588235294118))
-        .navigationBarHidden(true)
+
+    
     }
-}
+
 
 #Preview {
     QuestionView()
