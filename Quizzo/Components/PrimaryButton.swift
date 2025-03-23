@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PrimaryButton: View {
     var text: String
-    var background: Color = .purple
     var action: () -> Void
     
     var body: some View {
@@ -18,7 +17,7 @@ struct PrimaryButton: View {
                 .foregroundStyle(.white)
                 .padding()
                 .padding(.horizontal)
-                .background(background)
+                .background(Color.purple)
                 .clipShape(Capsule())
         }
     }

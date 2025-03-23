@@ -13,8 +13,11 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if showQuiz {
-                QuestionView()
-                    .transition(.scale)
+                withAnimation {
+                    QuestionView()
+                }
+                .transition(.slide)
+
             } else {
                 VStack(spacing: 40) {
                     VStack(spacing: 20) {
@@ -27,13 +30,12 @@ struct ContentView: View {
                             .foregroundStyle(.purple)
                     }
                     
-                    Button(action: {
-                        withAnimation {
+                    PrimaryButton(text: "Start") {
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             showQuiz = true
                         }
-                    }) {
-                        PrimaryButton(text: "Start", action: {})
                     }
+
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(red: 0.984, green: 0.929, blue: 0.847))
@@ -42,6 +44,7 @@ struct ContentView: View {
         }
     }
 }
+
 
 
 #Preview {
