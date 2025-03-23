@@ -25,16 +25,26 @@ struct QuestionView: View {
             }
             
             VStack(alignment: .leading, spacing: 20) {
-                Text("Which country has the Union Jack in its flag?")
+                Text("What is the first element on the periodic table?")
                     .font(.system(size:20))
                     .bold()
                     .foregroundStyle(.gray)
+    
+                AnswerRow(answer: Answer(text: "Hydrogen", isCorrect: true))
+                AnswerRow(answer: Answer(text: "Helium", isCorrect: false))
+                AnswerRow(answer: Answer(text: "Oxygen", isCorrect: false))
+                AnswerRow(answer: Answer(text: "Lithium", isCorrect: false))
             }
+            
+            PrimaryButton(text: "Next")
+            
+            Spacer()
             
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 0.984313725490196, green: 0.929411764705824, blue: 0.8470588235294118))
+        .navigationBarHidden(true)
     }
 }
 
