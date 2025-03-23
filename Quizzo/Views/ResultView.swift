@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ResultView: View {
+    @Binding var incorrectAnswers: Int
 
     var body: some View {
         VStack(spacing: 30) {
@@ -16,7 +17,7 @@ struct ResultView: View {
                 .foregroundStyle(.purple)
                 .fontWeight(.heavy)
             
-            Text("You selected the wrong answer 5 times.")
+            Text("You selected the wrong answer \(incorrectAnswers) times.")
                 .foregroundStyle(.gray)
                 .fontWeight(.heavy)
             
@@ -35,5 +36,5 @@ struct ResultView: View {
 }
 
 #Preview {
-    ResultView()
+    ResultView(incorrectAnswers: .constant(5))
 }
