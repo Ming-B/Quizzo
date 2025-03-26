@@ -16,7 +16,7 @@ struct ContentView: View {
                 withAnimation {
                     QuestionView()
                 }
-                .transition(.slide)
+                .transition(.scale)
 
             } else {
                 VStack(spacing: 40) {
