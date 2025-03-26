@@ -13,6 +13,7 @@ struct QuestionView: View {
     @State var correctAnswerSelected = false
     @State var isSelected = false
     @State private var scale = 1.0
+
     @State private var isDone = false
     
     @State private var questions: [Question] = QuizzoQuestions.shuffled()
@@ -67,6 +68,12 @@ struct QuestionView: View {
                                 }
                                 
                                 else {
+                                    withAnimation(.linear) {
+                                        scale = 2.0
+                                        
+                                    } completion : {
+                                        scale = 1.0
+                                    }
                                     incorrectAnswers += 1
                                 }
                                 
