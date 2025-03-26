@@ -22,7 +22,7 @@ struct QuestionView: View {
         VStack(spacing: 20) {
             // if done { ResultView() } else {
             if isDone {
-                ResultView(incorrectAnswers: $incorrectAnswers)
+                ResultView(incorrectAnswers: $incorrectAnswers, isDone: $isDone)
             }
             
             else {
@@ -83,6 +83,8 @@ struct QuestionView: View {
                     }
                     
                     else {
+                        currentQuestionIndex = 0
+                        questions.shuffle()
                         isDone.toggle()
                     }
                 }

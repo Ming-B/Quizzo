@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ResultView: View {
     @Binding var incorrectAnswers: Int
+    @Binding var isDone: Bool
 
     var body: some View {
         VStack(spacing: 30) {
@@ -23,6 +24,7 @@ struct ResultView: View {
             
             
             PrimaryButton(text: "Retake Quiz") {
+                isDone = false
             }
             .fontWeight(.heavy)
         }
@@ -36,5 +38,5 @@ struct ResultView: View {
 }
 
 #Preview {
-    ResultView(incorrectAnswers: .constant(5))
+    ResultView(incorrectAnswers: .constant(5), isDone: .constant(true))
 }
