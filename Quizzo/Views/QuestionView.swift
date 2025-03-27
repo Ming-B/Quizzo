@@ -60,7 +60,7 @@ struct QuestionView: View {
                                 if answer.isCorrect {
                                     correctAnswerSelected = true
                                     withAnimation(.easeInOut(duration: 1.0)) {
-                                        scale = 15.0
+                                        scale = 20.0
                                     } completion: {
                                         scale = 1.0
                                     }
@@ -75,7 +75,6 @@ struct QuestionView: View {
                                             rotationNum -= 20
                                         }
                                     }
-
                                     incorrectAnswers += 1
                                 }
                             }
