@@ -11,8 +11,9 @@ struct QuestionView: View {
     @State var currentQuestionIndex = 0
     @State var incorrectAnswers = 0
     @State var correctAnswerSelected = false
-    @State var isSelected = false
+    @State var answerSelected = false
     @State private var scale = 1.0
+    @State private var rotationNum = 0.0
 
     @State private var isDone = false
     
@@ -21,7 +22,7 @@ struct QuestionView: View {
     var body: some View {
         
         VStack(spacing: 20) {
-            // if done { ResultView() } else {
+            
             if isDone {
                 ResultView(incorrectAnswers: $incorrectAnswers, isDone: $isDone)
             }
@@ -50,39 +51,50 @@ struct QuestionView: View {
                     
                     
                     ForEach(questions[currentQuestionIndex].answers) { answer in
-                        AnswerRow(answer: answer)
+                        AnswerRow(answer: answer, correctAnswerSelected: $correctAnswerSelected, answerSelected: $answerSelected)
                             .scaleEffect(scale)
+                            .rotationEffect(.degrees(rotationNum))
                             .onTapGesture {
-                                guard !isSelected else {return}
-                                isSelected = true
+                                
+                                answerSelected = true
                                 
                                 if answer.isCorrect {
-                                    withAnimation(.linear) {
-                                        scale = 20.0
+                                    correctAnswerSelected = true
+                                    withAnimation(.easeInOut(duration: 1.0)) {
+                                        scale = 15.0
                                     } completion: {
                                         scale = 1.0
                                     }
                                     
-                                    correctAnswerSelected = true
-                                    
                                 }
                                 
                                 else {
-                                    withAnimation(.linear) {
-                                        scale = 2.0
+                                    withAnimation {
+                                        rotationNum += 20
+                                        
                                         
                                     } completion : {
-                                        scale = 1.0
+                                        withAnimation {
+                                            rotationNum -= 20
+                                        }
                                     }
+                                    
+                                    //if incorrect, maybe something with a rotationEffect with a phase animator
+                                    //can do withAnimation, just have a variable with rotation effect and use a completion block to reset
+
                                     incorrectAnswers += 1
                                 }
+                                
+
                                 
                             }
                     }
                     
+                    
                 }
+                
                 PrimaryButton(text: "Next") {
-                    isSelected = false
+                    answerSelected = false
                     correctAnswerSelected = false
                     
                     if currentQuestionIndex < questions.count - 1 {

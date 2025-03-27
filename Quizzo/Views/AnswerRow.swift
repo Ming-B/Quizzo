@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AnswerRow: View {
     var answer: Answer
+    @Binding var correctAnswerSelected: Bool
+    @Binding var answerSelected: Bool
     
     var body: some View {
         HStack(spacing: 20) {
@@ -21,7 +23,7 @@ struct AnswerRow: View {
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
         .foregroundStyle(.purple)
-        .background(.white)
+        .background(answerSelected ? (correctAnswerSelected ? Color.green : Color.red) : Color.white)
         .clipShape(Capsule())
 
         
@@ -30,6 +32,6 @@ struct AnswerRow: View {
 }
 
 #Preview {
-    AnswerRow(answer: Answer(text: "Single", isCorrect: true))
+    AnswerRow(answer: Answer(text: "Single", isCorrect: true), correctAnswerSelected: .constant(false), answerSelected: .constant(false))
 
 }
