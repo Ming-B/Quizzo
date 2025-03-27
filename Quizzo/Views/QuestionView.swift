@@ -71,22 +71,14 @@ struct QuestionView: View {
                                 else {
                                     withAnimation {
                                         rotationNum += 20
-                                        
-                                        
                                     } completion : {
                                         withAnimation {
                                             rotationNum -= 20
                                         }
                                     }
-                                    
-                                    //if incorrect, maybe something with a rotationEffect with a phase animator
-                                    //can do withAnimation, just have a variable with rotation effect and use a completion block to reset
 
                                     incorrectAnswers += 1
                                 }
-                                
-
-                                
                             }
                     }
                     
