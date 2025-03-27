@@ -26,6 +26,8 @@ struct AnswerRow: View {
         .background(answerSelected ? (correctAnswerSelected ? Color.green : Color.red) : Color.white)
         .clipShape(Capsule())
 
+
+
         
         
     }
