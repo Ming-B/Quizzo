@@ -18,7 +18,7 @@ struct ResultView: View {
                 .foregroundStyle(.purple)
                 .fontWeight(.heavy)
             
-            Text("You selected the wrong answer \(incorrectAnswers) times.")
+            Text("You selected the wrong answer \(incorrectAnswers) time(s).")
                 .foregroundStyle(.gray)
                 .fontWeight(.heavy)
             

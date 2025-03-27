@@ -14,7 +14,6 @@ struct QuestionView: View {
     @State var answerSelected = false
     @State private var scale = 1.0
     @State private var rotationNum = 0.0
-
     @State private var isDone = false
     
     @State private var questions: [Question] = QuizzoQuestions.shuffled()
